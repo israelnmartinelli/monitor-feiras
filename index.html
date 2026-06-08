@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendário de Feiras e Eventos Industriais</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:14px;color:#1a1a1a;background:#fff;padding:16px;line-height:1.5}
+.wrap{max-width:900px;margin:0 auto}
+
+/* Header */
+.hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding-bottom:12px;border-bottom:1px solid #e5e5e5;margin-bottom:16px;flex-wrap:wrap}
+.hdr-title{font-size:18px;font-weight:500}
+.hdr-sub{font-size:12px;color:#888;margin-top:3px}
+.view-tgl{display:flex;gap:4px;flex-shrink:0}
+.vbtn{padding:5px 12px;font-size:12px;border:1px solid #ddd;border-radius:6px;background:transparent;color:#666;cursor:pointer;transition:all .15s}
+.vbtn.active{background:#f0f0f0;color:#1a1a1a;border-color:#bbb}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.stat{background:#f8f8f7;border-radius:8px;padding:10px 12px}
+.stat-n{font-size:22px;font-weight:500}
+.stat-l{font-size:11px;color:#888;margin-top:2px}
+
+/* Filters */
+.frow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.flbl{font-size:12px;color:#888;white-space:nowrap}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;font-size:12px;border-radius:99px;border:1px solid #e0e0e0;cursor:pointer;transition:all .15s;color:#666;background:transparent;white-space:nowrap}
+.chip:hover{border-color:#bbb}
+.chip.active{border-color:transparent}
+.cdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.chip-all.active{background:#f0f0f0;color:#1a1a1a;border-color:#bbb}
+.chip-min.active{background:#e6f1fb;color:#0c447c}
+.chip-sid.active{background:#eaf3de;color:#27500a}
+.chip-met.active{background:#eeedfe;color:#3c3489}
+.chip-pin.active{background:#faece7;color:#712b13}
+.chip-pap.active{background:#e1f5ee;color:#085041}
+.chip-pet.active{background:#faeeda;color:#633806}
+.chip-ter.active{background:#fbeaf0;color:#72243e}
+.d-min{background:#378add}.d-sid{background:#639922}.d-met{background:#7f77dd}
+.d-pin{background:#d85a30}.d-pap{background:#1d9e75}.d-pet{background:#ba7517}.d-ter{background:#d4537e}
+.fsel,.fsearch{padding:5px 8px;font-size:12px;border:1px solid #e0e0e0;border-radius:6px;background:transparent;color:#1a1a1a}
+.fsearch{width:160px}.fsearch::placeholder{color:#aaa}
+
+/* Calendar */
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.cal-nav-title{font-size:14px;font-weight:500}
+.cal-nav-btn{padding:3px 10px;font-size:12px;border:1px solid #e0e0e0;border-radius:6px;background:transparent;color:#666;cursor:pointer}
+.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}
+.cal-dlbl{text-align:center;font-size:11px;color:#888;padding:4px 0;font-weight:500}
+.cal-cell{min-height:84px;border:1px solid #f0f0f0;border-radius:6px;padding:4px;background:#fff;width:100%;overflow:hidden}
+.cal-cell.empty{background:transparent;border-color:transparent}
+.cal-cell.today{border-color:#378add}
+.cal-num{font-size:11px;color:#888;margin-bottom:2px}
+.cal-num.is-today{font-weight:500;color:#fff;background:#378add;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:10px}
+.cal-pill{display:block;font-size:10px;padding:2px 5px;border-radius:3px;margin-bottom:2px;white-space:normal;word-break:break-word;overflow-wrap:break-word;cursor:pointer;line-height:1.4;transition:opacity .1s}
+.cal-pill:hover{opacity:.8}
+.cal-more{font-size:10px;color:#aaa;margin-top:1px}
+
+/* ── PAINEL DE DETALHES ───────────────────────── */
+.detail-panel{
+  display:none;
+  border-radius:10px;
+  border:1px solid #e0e0e0;
+  border-left:4px solid #999;
+  background:#fff;
+  padding:16px 18px;
+  margin:12px 0;
+  position:relative;
+  animation:slideIn .15s ease;
+}
+.detail-panel.open{display:block}
+@keyframes slideIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.detail-close{
+  position:absolute;top:12px;right:12px;
+  width:26px;height:26px;border-radius:50%;
+  border:1px solid #e0e0e0;background:transparent;
+  cursor:pointer;font-size:14px;color:#888;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;line-height:1
+}
+.detail-close:hover{background:#f5f5f5;color:#1a1a1a}
+.detail-name{font-size:16px;font-weight:500;margin-bottom:8px;padding-right:36px}
+.detail-badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 20px;margin-bottom:12px}
+.detail-field{font-size:13px}
+.detail-label{font-size:11px;color:#888;margin-bottom:2px;text-transform:uppercase;letter-spacing:.03em;font-weight:500}
+.detail-value{color:#1a1a1a}
+.detail-desc{font-size:13px;color:#555;border-top:1px solid #f0f0f0;padding-top:10px;margin-top:4px}
+.detail-link{
+  display:inline-flex;align-items:center;gap:5px;
+  margin-top:10px;padding:5px 14px;
+  font-size:12px;border:1px solid #ddd;border-radius:6px;
+  color:#1a1a1a;text-decoration:none;background:transparent;
+  transition:all .15s
+}
+.detail-link:hover{background:#f5f5f5;border-color:#bbb}
+
+/* List */
+.evtlist{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.ecard{background:#fff;border:1px solid #eee;border-radius:10px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start;transition:border-color .15s;cursor:default}
+.ecard:hover{border-color:#ccc}
+.edate{min-width:46px;text-align:center;background:#f8f8f7;border-radius:8px;padding:7px 4px;flex-shrink:0}
+.eday{font-size:20px;font-weight:500;line-height:1}
+.emon{font-size:10px;color:#888;text-transform:uppercase;margin-top:2px}
+.ebody{flex:1;min-width:0}
+.ename{font-size:14px;font-weight:500;margin-bottom:4px}
+.emeta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:4px}
+.etag{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:99px;font-size:11px}
+.ubadge{padding:2px 8px;border-radius:99px;font-size:11px;font-weight:500}
+.u-urgente{background:#fcebeb;color:#a32d2d}
+.u-breve{background:#faeeda;color:#854f0b}
+.u-normal{background:#eaf3de;color:#3b6d11}
+.einfo{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:#666;margin-top:2px}
+.elink{font-size:13px;color:#666;padding:4px 6px;border-radius:6px;text-decoration:none;flex-shrink:0;align-self:flex-start;border:1px solid transparent;transition:all .15s;line-height:1}
+.elink:hover{border-color:#e0e0e0;color:#1a1a1a}
+
+/* Empty */
+.empty{text-align:center;color:#aaa;font-size:13px;padding:2.5rem 0}
+
+/* Legend */
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;padding-top:12px;border-top:1px solid #f0f0f0;font-size:11px;color:#888}
+.leg{display:flex;align-items:center;gap:5px}
+
+@media(max-width:600px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .hdr{flex-direction:column}
+  .detail-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hdr">
+  <div>
+    <div class="hdr-title">&#128197; Calend&#225;rio de Feiras e Eventos Industriais</div>
+    <div class="hdr-sub" id="sub">—</div>
+  </div>
+  <div class="view-tgl">
+    <button class="vbtn active" id="btn-cal" onclick="setView('cal')">&#9783; Calend&#225;rio</button>
+    <button class="vbtn" id="btn-list" onclick="setView('list')">&#9776; Lista</button>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-n" id="s-tot">—</div><div class="stat-l">eventos encontrados</div></div>
+  <div class="stat"><div class="stat-n" style="color:#a32d2d" id="s-urg">—</div><div class="stat-l">urgentes (&#8804;30 dias)</div></div>
+  <div class="stat"><div class="stat-n" style="color:#854f0b" id="s-bre">—</div><div class="stat-l">em breve (31&#8211;60 dias)</div></div>
+  <div class="stat"><div class="stat-n" style="color:#3b6d11" id="s-nor">—</div><div class="stat-l">programados</div></div>
+</div>
+
+<div class="frow">
+  <span class="flbl">Setor:</span>
+  <button class="chip chip-all active" data-s="all" onclick="toggleSetor(this)">Todos</button>
+  <button class="chip chip-min" data-s="min" onclick="toggleSetor(this)"><span class="cdot d-min"></span>Minera&#231;&#227;o</button>
+  <button class="chip chip-sid" data-s="sid" onclick="toggleSetor(this)"><span class="cdot d-sid"></span>Siderurgia</button>
+  <button class="chip chip-met" data-s="met" onclick="toggleSetor(this)"><span class="cdot d-met"></span>Metalurgia</button>
+  <button class="chip chip-pin" data-s="pin" onclick="toggleSetor(this)"><span class="cdot d-pin"></span>Pintura Industrial</button>
+  <button class="chip chip-pap" data-s="pap" onclick="toggleSetor(this)"><span class="cdot d-pap"></span>Papel &amp; Celulose</button>
+  <button class="chip chip-pet" data-s="pet" onclick="toggleSetor(this)"><span class="cdot d-pet"></span>Petroqu&#237;mica</button>
+  <button class="chip chip-ter" data-s="ter" onclick="toggleSetor(this)"><span class="cdot d-ter"></span>Terras Raras</button>
+</div>
+<div class="frow">
+  <span class="flbl">Urg&#234;ncia:</span>
+  <select class="fsel" id="furg" onchange="render()">
+    <option value="all">Todas</option>
+    <option value="urgente">Urgente</option>
+    <option value="breve">Em breve</option>
+    <option value="normal">Normal</option>
+  </select>
+  <span class="flbl" style="margin-left:8px">Buscar:</span>
+  <input class="fsearch" type="text" id="fsearch" placeholder="Nome do evento..." oninput="render()">
+</div>
+
+<div id="vcal">
+  <div class="cal-nav">
+    <button class="cal-nav-btn" onclick="chMes(-1)">&#8592; anterior</button>
+    <span class="cal-nav-title" id="cal-title"></span>
+    <button class="cal-nav-btn" onclick="chMes(1)">pr&#243;ximo &#8594;</button>
+  </div>
+  <div class="cal-grid" id="cal-grid"></div>
+
+  <!-- Painel de detalhes do evento (aparece ao clicar no calendário) -->
+  <div class="detail-panel" id="detail-panel">
+    <button class="detail-close" onclick="closeDetail()" title="Fechar">&#10005;</button>
+    <div class="detail-name" id="dp-nome"></div>
+    <div class="detail-badges" id="dp-badges"></div>
+    <div class="detail-grid" id="dp-grid"></div>
+    <div class="detail-desc" id="dp-desc" style="display:none"></div>
+    <div id="dp-link"></div>
+  </div>
+</div>
+
+<div id="vlist" style="display:none">
+  <div class="evtlist" id="evtlist"></div>
+</div>
+
+<div class="legend">
+  <strong style="margin-right:4px">Urg&#234;ncia:</strong>
+  <span class="leg"><span class="ubadge u-urgente">urgente</span> &#8804;30 dias</span>
+  <span class="leg"><span class="ubadge u-breve">em breve</span> 31&#8211;60 dias</span>
+  <span class="leg"><span class="ubadge u-normal">normal</span> &gt;60 dias</span>
+</div>
+
+</div><!-- .wrap -->
+
+<script>
+/*
+ * ═══════════════════════════════════════════════════════
+ *  DADOS — substituídos pelo Claude ao gerar o arquivo
+ *
+ *  Campos obrigatórios:
+ *    id, nome, setor, inicio (YYYY-MM-DD), fim (YYYY-MM-DD),
+ *    local, link, urgencia ("urgente"|"breve"|"normal")
+ *
+ *  Campos opcionais:
+ *    custo_participacao, custo_exposicao,
+ *    publico_estimado, descricao
+ *
+ *  setor: "min"|"sid"|"met"|"pin"|"pap"|"pet"|"ter"
+ * ═══════════════════════════════════════════════════════
+ */
+const EVENTOS = [
+  {
+    id: 1,
+    nome: "Conf. Internacional de Processamento de Minerais",
+    setor: "min",
+    inicio: "2026-07-07",
+    fim: "2026-07-09",
+    local: "Belo Horizonte, MG",
+    link: "#",
+    urgencia: "urgente",
+    publico_estimado: "2.000 profissionais",
+    custo_participacao: "Consultar organizador",
+    descricao: "Conferência técnica internacional focada em tecnologias de processamento mineral e geometalurgia."
+  },
+  {
+    id: 2,
+    nome: "MEC Show 2026",
+    setor: "pet",
+    inicio: "2026-08-04",
+    fim: "2026-08-06",
+    local: "Serra, ES",
+    link: "https://mecshow.com.br",
+    urgencia: "breve",
+    publico_estimado: "20.000 visitantes",
+    custo_participacao: "Gratuito (pré-cadastro)",
+    custo_exposicao: "Consultar organização",
+    descricao: "Feira de inovação industrial cobrindo óleo, gás, papel, celulose, siderurgia, metalurgia e petroquímica."
+  },
+  {
+    id: 3,
+    nome: "Congresso Automação e IA em Mineração",
+    setor: "min",
+    inicio: "2026-08-05",
+    fim: "2026-08-07",
+    local: "Belo Horizonte, MG",
+    link: "#",
+    urgencia: "breve",
+    publico_estimado: "1.500 profissionais",
+    custo_participacao: "R$ 1.200 – R$ 2.500",
+    descricao: "Congresso Internacional de Automação, Digitalização, Inteligência Artificial e Eletrificação em Mineração."
+  },
+  {
+    id: 4,
+    nome: "EXPOSIBRAM 2026",
+    setor: "min",
+    inicio: "2026-08-24",
+    fim: "2026-08-27",
+    local: "Belo Horizonte, MG",
+    link: "https://exposibram2026.ibram.org.br/",
+    urgencia: "normal",
+    publico_estimado: "86.000 visitantes",
+    custo_participacao: "Consultar IBRAM",
+    custo_exposicao: "A partir de R$ 8.000/m²",
+    descricao: "Principal feira de mineração da América Latina. 600+ expositores nacionais e internacionais de tecnologias, equipamentos e serviços."
+  },
+  {
+    id: 5,
+    nome: "Interform 2026",
+    setor: "met",
+    inicio: "2026-09-15",
+    fim: "2026-09-18",
+    local: "Joinville, SC (Expoville)",
+    link: "https://interform.com.br/",
+    urgencia: "normal",
+    publico_estimado: "15.000 profissionais",
+    custo_participacao: "Consultar organização",
+    custo_exposicao: "Consultar Messe Brasil",
+    descricao: "Feira Internacional de Tecnologia para Corte, Conformação, Usinagem, Soldagem e Automação. 180 expositores nacionais e internacionais."
+  },
+  {
+    id: 6,
+    nome: "ABTCP 2026 – Congresso Internacional de Celulose e Papel",
+    setor: "pap",
+    inicio: "2026-10-06",
+    fim: "2026-10-08",
+    local: "São Paulo, SP",
+    link: "https://abtcp2026.org.br/",
+    urgencia: "normal",
+    publico_estimado: "3.000 participantes (25+ países)",
+    custo_participacao: "R$ 800 – R$ 2.200",
+    custo_exposicao: "A partir de R$ 12.000",
+    descricao: "57º Congresso e Exposição Internacional de Celulose e Papel. 4.000 m² de exposição. Foco em bioeconomia e sustentabilidade."
+  },
+  {
+    id: 7,
+    nome: "Mercopar 2026",
+    setor: "met",
+    inicio: "2026-10-20",
+    fim: "2026-10-23",
+    local: "Caxias do Sul, RS",
+    link: "https://mercopar.com.br/",
+    urgencia: "normal",
+    publico_estimado: "40.000 visitantes",
+    custo_participacao: "Gratuito (pré-inscrição)",
+    custo_exposicao: "Consultar organização",
+    descricao: "Maior feira de inovação industrial da América Latina. 500+ expositores de 12 estados. Foco em indústria 4.0, automação e metal-mecânica."
+  }
+];
+const DATA_GERACAO = "08/06/2026";
+
+/* ─── MAPA DE SETORES ──────────────────────── */
+const S = {
+  min:{l:'Mineração',        bg:'#e6f1fb',tx:'#0c447c',dt:'#378add'},
+  sid:{l:'Siderurgia',       bg:'#eaf3de',tx:'#27500a',dt:'#639922'},
+  met:{l:'Metalurgia',       bg:'#eeedfe',tx:'#3c3489',dt:'#7f77dd'},
+  pin:{l:'Pintura Industrial',bg:'#faece7',tx:'#712b13',dt:'#d85a30'},
+  pap:{l:'Papel & Celulose', bg:'#e1f5ee',tx:'#085041',dt:'#1d9e75'},
+  pet:{l:'Petroquímica',     bg:'#faeeda',tx:'#633806',dt:'#ba7517'},
+  ter:{l:'Terras Raras',     bg:'#fbeaf0',tx:'#72243e',dt:'#d4537e'}
+};
+const MESES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+const DIAS=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+
+let view='cal', calY, calM;
+let ativos=new Set(['all']);
+const hoje=new Date(); hoje.setHours(0,0,0,0);
+
+/* ─── INIT ─────────────────────────────────── */
+(function(){
+  const prox=EVENTOS.map(e=>pd(e.inicio)).filter(d=>d>=hoje).sort((a,b)=>a-b);
+  const ref=prox.length?prox[0]:hoje;
+  calY=ref.getFullYear(); calM=ref.getMonth();
+  const n=EVENTOS.length;
+  document.getElementById('sub').textContent=
+    (DATA_GERACAO?'Atualizado em '+DATA_GERACAO+' · ':'')+n+' evento'+(n!==1?'s':'')+' encontrado'+(n!==1?'s':'');
+  render();
+})();
+
+/* ─── HELPERS ──────────────────────────────── */
+function pd(s){const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d);}
+function fs(d){return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});}
+
+/* ─── FILTRO ───────────────────────────────── */
+function getFilt(){
+  const u=document.getElementById('furg').value;
+  const q=document.getElementById('fsearch').value.toLowerCase().trim();
+  return EVENTOS.filter(ev=>{
+    const sOk=ativos.has('all')||ativos.has(ev.setor);
+    const uOk=u==='all'||ev.urgencia===u;
+    const qOk=!q||ev.nome.toLowerCase().includes(q)||(S[ev.setor]?.l||'').toLowerCase().includes(q);
+    return sOk&&uOk&&qOk;
+  });
+}
+
+/* ─── CONTROLES ────────────────────────────── */
+function setView(v){
+  view=v;
+  document.getElementById('vcal').style.display=v==='cal'?'':'none';
+  document.getElementById('vlist').style.display=v==='list'?'':'none';
+  document.getElementById('btn-cal').classList.toggle('active',v==='cal');
+  document.getElementById('btn-list').classList.toggle('active',v==='list');
+  render();
+}
+function toggleSetor(btn){
+  const s=btn.dataset.s;
+  if(s==='all'){ativos=new Set(['all']);}
+  else{
+    ativos.delete('all');
+    ativos.has(s)?ativos.delete(s):ativos.add(s);
+    if(!ativos.size)ativos=new Set(['all']);
+  }
+  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',ativos.has(c.dataset.s)));
+  render();
+}
+function chMes(d){
+  calM+=d;
+  if(calM>11){calM=0;calY++;}
+  if(calM<0){calM=11;calY--;}
+  closeDetail();
+  render();
+}
+
+/* ─── PAINEL DE DETALHES ───────────────────── */
+function openDetail(id){
+  const ev=EVENTOS.find(e=>e.id===id);
+  if(!ev)return;
+  const sx=S[ev.setor]||{l:ev.setor,bg:'#f0f0f0',tx:'#333',dt:'#999'};
+  const ub=ev.urgencia==='urgente'?'u-urgente':ev.urgencia==='breve'?'u-breve':'u-normal';
+  const ul=ev.urgencia==='urgente'?'Urgente':ev.urgencia==='breve'?'Em breve':'Normal';
+  const sd=pd(ev.inicio),ed=pd(ev.fim);
+  const dr=sd.getTime()===ed.getTime()?fs(sd):`${fs(sd)} a ${fs(ed)}`;
+
+  /* nome */
+  document.getElementById('dp-nome').textContent=ev.nome;
+
+  /* badges */
+  document.getElementById('dp-badges').innerHTML=
+    `<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:99px;font-size:12px;background:${sx.bg};color:${sx.tx}">
+       <span style="width:7px;height:7px;border-radius:50%;background:${sx.dt};display:inline-block"></span>${sx.l}
+     </span>
+     <span class="ubadge ${ub}">${ul}</span>`;
+
+  /* campos */
+  const fields=[
+    {l:'Data',v:dr},
+    {l:'Local',v:ev.local},
+    ev.publico_estimado?{l:'Público estimado',v:ev.publico_estimado}:null,
+    ev.custo_participacao?{l:'Participar como visitante',v:ev.custo_participacao}:null,
+    ev.custo_exposicao?{l:'Expor / stand',v:ev.custo_exposicao}:null
+  ].filter(Boolean);
+  document.getElementById('dp-grid').innerHTML=fields.map(f=>
+    `<div class="detail-field"><div class="detail-label">${f.l}</div><div class="detail-value">${f.v}</div></div>`
+  ).join('');
+
+  /* descrição */
+  const descEl=document.getElementById('dp-desc');
+  if(ev.descricao){descEl.textContent=ev.descricao;descEl.style.display='';}
+  else{descEl.style.display='none';}
+
+  /* link */
+  const linkEl=document.getElementById('dp-link');
+  if(ev.link&&ev.link!=='#'){
+    linkEl.innerHTML=`<a href="${ev.link}" class="detail-link" target="_blank" rel="noopener">Ver site oficial &#8599;</a>`;
+  } else {
+    linkEl.innerHTML='';
+  }
+
+  /* cor da borda esquerda */
+  const panel=document.getElementById('detail-panel');
+  panel.style.borderLeftColor=sx.dt;
+  panel.style.backgroundColor=sx.bg+'33'; /* 20% opacity */
+  panel.classList.add('open');
+
+  /* rola para o painel */
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function closeDetail(){
+  document.getElementById('detail-panel').classList.remove('open');
+}
+
+/* ─── RENDER ───────────────────────────────── */
+function render(){
+  const f=getFilt();
+  document.getElementById('s-tot').textContent=f.length;
+  document.getElementById('s-urg').textContent=f.filter(e=>e.urgencia==='urgente').length;
+  document.getElementById('s-bre').textContent=f.filter(e=>e.urgencia==='breve').length;
+  document.getElementById('s-nor').textContent=f.filter(e=>e.urgencia==='normal').length;
+  view==='cal'?rCal(f):rList(f);
+}
+
+function rCal(f){
+  document.getElementById('cal-title').textContent=MESES[calM]+' '+calY;
+  const first=new Date(calY,calM,1).getDay();
+  const days=new Date(calY,calM+1,0).getDate();
+  let h=DIAS.map(d=>`<div class="cal-dlbl">${d}</div>`).join('');
+  for(let i=0;i<first;i++)h+=`<div class="cal-cell empty"></div>`;
+  for(let d=1;d<=days;d++){
+    const cur=new Date(calY,calM,d);
+    const isT=cur.getTime()===hoje.getTime();
+    const evs=f.filter(ev=>{const s=pd(ev.inicio),e=pd(ev.fim);return cur>=s&&cur<=e;});
+    h+=`<div class="cal-cell${isT?' today':''}">`;
+    h+=isT?`<div class="cal-num is-today">${d}</div>`:`<div class="cal-num">${d}</div>`;
+    evs.slice(0,2).forEach(ev=>{
+      const sx=S[ev.setor]||{bg:'#f0f0f0',tx:'#333'};
+      h+=`<div class="cal-pill" style="background:${sx.bg};color:${sx.tx}" onclick="openDetail(${ev.id})" title="${ev.nome}">${ev.nome}</div>`;
+    });
+    if(evs.length>2)h+=`<div class="cal-more">+${evs.length-2} mais</div>`;
+    h+=`</div>`;
+  }
+  document.getElementById('cal-grid').innerHTML=h;
+}
+
+function rList(f){
+  const el=document.getElementById('evtlist');
+  if(!f.length){el.innerHTML=`<div class="empty">Nenhum evento encontrado com os filtros selecionados.</div>`;return;}
+  const sorted=[...f].sort((a,b)=>pd(a.inicio)-pd(b.inicio));
+  el.innerHTML=sorted.map(ev=>{
+    const sx=S[ev.setor]||{l:ev.setor,bg:'#f0f0f0',tx:'#333',dt:'#999'};
+    const ub=ev.urgencia==='urgente'?'u-urgente':ev.urgencia==='breve'?'u-breve':'u-normal';
+    const ul=ev.urgencia==='urgente'?'urgente':ev.urgencia==='breve'?'em breve':'normal';
+    const sd=pd(ev.inicio),ed=pd(ev.fim);
+    const dr=sd.getTime()===ed.getTime()?fs(sd):`${fs(sd)} – ${fs(ed)}`;
+    const extras=[
+      ev.publico_estimado?`&#128100; ${ev.publico_estimado}`:'',
+      ev.custo_participacao?`Participar: ${ev.custo_participacao}`:'',
+      ev.custo_exposicao?`Expor: ${ev.custo_exposicao}`:''
+    ].filter(Boolean).map(x=>`<span>${x}</span>`).join('');
+    return `<div class="ecard">
+      <div class="edate"><div class="eday">${sd.getDate()}</div><div class="emon">${MESES[sd.getMonth()].substring(0,3)}</div></div>
+      <div class="ebody">
+        <div class="ename">${ev.nome}</div>
+        <div class="emeta">
+          <span class="etag" style="background:${sx.bg};color:${sx.tx}">
+            <span style="width:6px;height:6px;border-radius:50%;background:${sx.dt};display:inline-block;flex-shrink:0"></span>${sx.l}
+          </span>
+          <span class="ubadge ${ub}">${ul}</span>
+          <span style="font-size:12px;color:#666">&#128205; ${ev.local}</span>
+          <span style="font-size:12px;color:#666">&#128197; ${dr}</span>
+        </div>
+        ${extras?`<div class="einfo">${extras}</div>`:''}
+        ${ev.descricao?`<div style="font-size:12px;color:#888;margin-top:4px">${ev.descricao}</div>`:''}
+      </div>
+      ${ev.link&&ev.link!=='#'?`<a href="${ev.link}" class="elink" target="_blank" rel="noopener" title="Ver evento">&#8599;</a>`:''}
+    </div>`;
+  }).join('');
+}
+</script>
+</body>
+</html>
