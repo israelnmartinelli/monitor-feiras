@@ -225,16 +225,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;f
 const EVENTOS = [
   {
     id: 1,
-    nome: "Conf. Internacional de Processamento de Minerais",
+    nome: "World Mining Congress 2026",
     setor: "min",
-    inicio: "2026-07-07",
-    fim: "2026-07-09",
-    local: "Belo Horizonte, MG",
-    link: "#",
+    inicio: "2026-06-24",
+    fim: "2026-06-26",
+    local: "Lima, Peru",
+    link: "https://worldminingcongress.com",
     urgencia: "urgente",
-    publico_estimado: "2.000 profissionais",
-    custo_participacao: "Consultar organizador",
-    descricao: "Conferência técnica internacional focada em tecnologias de processamento mineral e geometalurgia."
+    publico_estimado: "~3.000 profissionais",
+    custo_participacao: "US$ 800 – US$ 2.000 est.",
+    descricao: "Congresso bienal internacional de mineração. Edição 2026 sediada em Lima, Peru. Presença de lideranças mundiais do setor mineral."
   },
   {
     id: 2,
@@ -245,26 +245,13 @@ const EVENTOS = [
     local: "Serra, ES",
     link: "https://mecshow.com.br",
     urgencia: "breve",
-    publico_estimado: "20.000 visitantes",
+    publico_estimado: "~20.000 visitantes",
     custo_participacao: "Gratuito (pré-cadastro)",
-    custo_exposicao: "Consultar organização",
-    descricao: "Feira de inovação industrial cobrindo óleo, gás, papel, celulose, siderurgia, metalurgia e petroquímica."
+    custo_exposicao: "A consultar organização",
+    descricao: "Feira multissetorial de inovação industrial: petroquímica, óleo e gás, siderurgia, metalurgia e papel e celulose. Polo industrial de Serra/ES."
   },
   {
     id: 3,
-    nome: "Congresso Automação e IA em Mineração",
-    setor: "min",
-    inicio: "2026-08-05",
-    fim: "2026-08-07",
-    local: "Belo Horizonte, MG",
-    link: "#",
-    urgencia: "breve",
-    publico_estimado: "1.500 profissionais",
-    custo_participacao: "R$ 1.200 – R$ 2.500",
-    descricao: "Congresso Internacional de Automação, Digitalização, Inteligência Artificial e Eletrificação em Mineração."
-  },
-  {
-    id: 4,
     nome: "EXPOSIBRAM 2026",
     setor: "min",
     inicio: "2026-08-24",
@@ -272,10 +259,23 @@ const EVENTOS = [
     local: "Belo Horizonte, MG",
     link: "https://exposibram2026.ibram.org.br/",
     urgencia: "normal",
-    publico_estimado: "86.000 visitantes",
-    custo_participacao: "Consultar IBRAM",
-    custo_exposicao: "A partir de R$ 8.000/m²",
-    descricao: "Principal feira de mineração da América Latina. 600+ expositores nacionais e internacionais de tecnologias, equipamentos e serviços."
+    publico_estimado: "~86.000 visitantes",
+    custo_participacao: "A consultar IBRAM",
+    custo_exposicao: "A partir de R$ 8.000/m² est.",
+    descricao: "Principal feira de mineração da América Latina. 600+ expositores nacionais e internacionais. Organização IBRAM."
+  },
+  {
+    id: 4,
+    nome: "ABM Week 10",
+    setor: "sid",
+    inicio: "2026-09-08",
+    fim: "2026-09-10",
+    local: "São Paulo, SP",
+    link: "https://abmbrasil.com.br/semana-abm",
+    urgencia: "normal",
+    publico_estimado: "~10.000 profissionais",
+    custo_participacao: "R$ 1.200 – R$ 2.500 est.",
+    descricao: "10ª edição da Semana ABM. Principal congresso técnico-científico de siderurgia, metalurgia e mineração do Brasil."
   },
   {
     id: 5,
@@ -283,16 +283,29 @@ const EVENTOS = [
     setor: "met",
     inicio: "2026-09-15",
     fim: "2026-09-18",
-    local: "Joinville, SC (Expoville)",
+    local: "Joinville, SC",
     link: "https://interform.com.br/",
     urgencia: "normal",
-    publico_estimado: "15.000 profissionais",
-    custo_participacao: "Consultar organização",
-    custo_exposicao: "Consultar Messe Brasil",
-    descricao: "Feira Internacional de Tecnologia para Corte, Conformação, Usinagem, Soldagem e Automação. 180 expositores nacionais e internacionais."
+    publico_estimado: "~15.000 profissionais",
+    custo_participacao: "A consultar organização",
+    custo_exposicao: "A consultar Messe Brasil",
+    descricao: "Feira Internacional de Corte, Conformação, Usinagem, Soldagem e Automação. 180+ expositores nacionais e internacionais."
   },
   {
     id: 6,
+    nome: "ROG.e 2026 – Rio Oil & Gas",
+    setor: "pet",
+    inicio: "2026-09-21",
+    fim: "2026-09-24",
+    local: "Rio de Janeiro, RJ",
+    link: "https://riooilandgas.org.br",
+    urgencia: "normal",
+    publico_estimado: "~80.000 visitantes",
+    custo_participacao: "A consultar IBP",
+    descricao: "Principal evento de óleo, gás e energia do Brasil, organizado pelo IBP. Abrange toda a cadeia petroquímica e energética."
+  },
+  {
+    id: 7,
     nome: "ABTCP 2026 – Congresso Internacional de Celulose e Papel",
     setor: "pap",
     inicio: "2026-10-06",
@@ -300,13 +313,13 @@ const EVENTOS = [
     local: "São Paulo, SP",
     link: "https://abtcp2026.org.br/",
     urgencia: "normal",
-    publico_estimado: "3.000 participantes (25+ países)",
-    custo_participacao: "R$ 800 – R$ 2.200",
-    custo_exposicao: "A partir de R$ 12.000",
-    descricao: "57º Congresso e Exposição Internacional de Celulose e Papel. 4.000 m² de exposição. Foco em bioeconomia e sustentabilidade."
+    publico_estimado: "~3.000 participantes (25+ países)",
+    custo_participacao: "R$ 800 – R$ 2.200 est.",
+    custo_exposicao: "A partir de R$ 12.000 est.",
+    descricao: "57º Congresso e Exposição Internacional de Celulose e Papel. Foco em bioeconomia, sustentabilidade e inovação florestal."
   },
   {
-    id: 7,
+    id: 8,
     nome: "Mercopar 2026",
     setor: "met",
     inicio: "2026-10-20",
@@ -314,10 +327,10 @@ const EVENTOS = [
     local: "Caxias do Sul, RS",
     link: "https://mercopar.com.br/",
     urgencia: "normal",
-    publico_estimado: "40.000 visitantes",
+    publico_estimado: "~40.000 visitantes",
     custo_participacao: "Gratuito (pré-inscrição)",
-    custo_exposicao: "Consultar organização",
-    descricao: "Maior feira de inovação industrial da América Latina. 500+ expositores de 12 estados. Foco em indústria 4.0, automação e metal-mecânica."
+    custo_exposicao: "A consultar organização",
+    descricao: "Maior feira de inovação industrial da América Latina. 500+ expositores. Foco em indústria 4.0, metal-mecânica e automação."
   }
 ];
 const DATA_GERACAO = "08/06/2026";
@@ -514,10 +527,4 @@ function rList(f){
         ${extras?`<div class="einfo">${extras}</div>`:''}
         ${ev.descricao?`<div style="font-size:12px;color:#888;margin-top:4px">${ev.descricao}</div>`:''}
       </div>
-      ${ev.link&&ev.link!=='#'?`<a href="${ev.link}" class="elink" target="_blank" rel="noopener" title="Ver evento">&#8599;</a>`:''}
-    </div>`;
-  }).join('');
-}
-</script>
-</body>
-</html>
+      ${ev.link&&ev.link!=='#'?`<a href="${ev.link}" class="elink" target="_blank" rel="noopener" title="Ver evento"
