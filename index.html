@@ -234,7 +234,7 @@ const EVENTOS = [
     urgencia: "urgente",
     publico_estimado: "~3.000 profissionais",
     custo_participacao: "US$ 800 – US$ 2.000 est.",
-    descricao: "Congresso bienal internacional de mineracao. Edicao 2026 sediada em Lima, Peru."
+    descricao: "Congresso bienal internacional de mineração. Edição 2026 sediada em Lima, Peru. Presença de lideranças mundiais do setor mineral."
   },
   {
     id: 2,
@@ -246,9 +246,9 @@ const EVENTOS = [
     link: "https://mecshow.com.br",
     urgencia: "breve",
     publico_estimado: "~20.000 visitantes",
-    custo_participacao: "Gratuito (pre-cadastro)",
-    custo_exposicao: "A consultar organizacao",
-    descricao: "Feira multissetorial: petroquimica, oleo e gas, siderurgia, metalurgia e papel e celulose."
+    custo_participacao: "Gratuito (pré-cadastro)",
+    custo_exposicao: "A consultar organização",
+    descricao: "Feira multissetorial de inovação industrial: petroquímica, óleo e gás, siderurgia, metalurgia e papel e celulose. Polo industrial de Serra/ES."
   },
   {
     id: 3,
@@ -261,8 +261,8 @@ const EVENTOS = [
     urgencia: "normal",
     publico_estimado: "~86.000 visitantes",
     custo_participacao: "A consultar IBRAM",
-    custo_exposicao: "A partir de R$ 8.000/m2 est.",
-    descricao: "Principal feira de mineracao da America Latina. 600+ expositores nacionais e internacionais."
+    custo_exposicao: "A partir de R$ 8.000/m² est.",
+    descricao: "Principal feira de mineração da América Latina. 600+ expositores nacionais e internacionais. Organização IBRAM."
   },
   {
     id: 4,
@@ -270,12 +270,12 @@ const EVENTOS = [
     setor: "sid",
     inicio: "2026-09-08",
     fim: "2026-09-10",
-    local: "Sao Paulo, SP",
-    link: "https://abmbrasil.com.br/semana-abm",
+    local: "São Paulo, SP",
+    link: "https://abmbrasil.com.br/evento/abm-week-10",
     urgencia: "normal",
     publico_estimado: "~10.000 profissionais",
-    custo_participacao: "R$ 1.200 a R$ 2.500 est.",
-    descricao: "10a edicao da Semana ABM. Principal congresso de siderurgia, metalurgia e mineracao do Brasil."
+    custo_participacao: "R$ 1.200 – R$ 2.500 est.",
+    descricao: "10ª edição da Semana ABM. Principal congresso técnico-científico de siderurgia, metalurgia e mineração do Brasil."
   },
   {
     id: 5,
@@ -287,36 +287,36 @@ const EVENTOS = [
     link: "https://interform.com.br/",
     urgencia: "normal",
     publico_estimado: "~15.000 profissionais",
-    custo_participacao: "A consultar organizacao",
+    custo_participacao: "A consultar organização",
     custo_exposicao: "A consultar Messe Brasil",
-    descricao: "Feira Internacional de Corte, Conformacao, Usinagem, Soldagem e Automacao. 180+ expositores."
+    descricao: "Feira Internacional de Corte, Conformação, Usinagem, Soldagem e Automação. 180+ expositores nacionais e internacionais."
   },
   {
     id: 6,
-    nome: "ROG.e 2026 - Rio Oil e Gas",
+    nome: "ROG.e 2026 – Rio Oil & Gas",
     setor: "pet",
     inicio: "2026-09-21",
     fim: "2026-09-24",
     local: "Rio de Janeiro, RJ",
-    link: "https://riooilandgas.org.br",
+    link: "https://roge.energy/",
     urgencia: "normal",
     publico_estimado: "~80.000 visitantes",
     custo_participacao: "A consultar IBP",
-    descricao: "Principal evento de oleo, gas e energia do Brasil, organizado pelo IBP."
+    descricao: "Principal evento de óleo, gás e energia do Brasil, organizado pelo IBP. Abrange toda a cadeia petroquímica e energética."
   },
   {
     id: 7,
-    nome: "ABTCP 2026 - Congresso Internacional de Celulose e Papel",
+    nome: "ABTCP 2026 – Congresso Internacional de Celulose e Papel",
     setor: "pap",
     inicio: "2026-10-06",
     fim: "2026-10-08",
-    local: "Sao Paulo, SP",
+    local: "São Paulo, SP",
     link: "https://abtcp2026.org.br/",
     urgencia: "normal",
-    publico_estimado: "~3.000 participantes (25+ paises)",
-    custo_participacao: "R$ 800 a R$ 2.200 est.",
+    publico_estimado: "~3.000 participantes (25+ países)",
+    custo_participacao: "R$ 800 – R$ 2.200 est.",
     custo_exposicao: "A partir de R$ 12.000 est.",
-    descricao: "57o Congresso e Exposicao Internacional de Celulose e Papel. Foco em bioeconomia e sustentabilidade."
+    descricao: "57º Congresso e Exposição Internacional de Celulose e Papel. Foco em bioeconomia, sustentabilidade e inovação florestal."
   },
   {
     id: 8,
@@ -328,9 +328,9 @@ const EVENTOS = [
     link: "https://mercopar.com.br/",
     urgencia: "normal",
     publico_estimado: "~40.000 visitantes",
-    custo_participacao: "Gratuito (pre-inscricao)",
-    custo_exposicao: "A consultar organizacao",
-    descricao: "Maior feira de inovacao industrial da America Latina. 500+ expositores."
+    custo_participacao: "Gratuito (pré-inscrição)",
+    custo_exposicao: "A consultar organização",
+    descricao: "Maior feira de inovação industrial da América Latina. 500+ expositores. Foco em indústria 4.0, metal-mecânica e automação."
   }
 ];
 const DATA_GERACAO = "08/06/2026";
@@ -527,10 +527,4 @@ function rList(f){
         ${extras?`<div class="einfo">${extras}</div>`:''}
         ${ev.descricao?`<div style="font-size:12px;color:#888;margin-top:4px">${ev.descricao}</div>`:''}
       </div>
-      ${ev.link&&ev.link!=='#'?`<a href="${ev.link}" class="elink" target="_blank" rel="noopener" title="Ver evento">&#8599;</a>`:''}
-    </div>`;
-  }).join('');
-}
-</script>
-</body>
-</html>
+      ${ev.link&&ev.link!=='#'?`<a href="${ev.link}" class="elink" target="_blank" rel="noopener" title="Ver evento"
