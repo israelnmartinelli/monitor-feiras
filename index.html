@@ -58,7 +58,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;f
 .cal-pill:hover{opacity:.8}
 .cal-more{font-size:10px;color:#aaa;margin-top:1px}
 
-/* ── PAINEL DE DETALHES ───────────────────────── */
+/* PAINEL DE DETALHES */
 .detail-panel{
   display:none;
   border-radius:10px;
@@ -136,7 +136,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;f
 <div class="hdr">
   <div>
     <div class="hdr-title">&#128197; Calend&#225;rio de Feiras e Eventos Industriais</div>
-    <div class="hdr-sub" id="sub">—</div>
+    <div class="hdr-sub" id="sub">&#8212;</div>
   </div>
   <div class="view-tgl">
     <button class="vbtn active" id="btn-cal" onclick="setView('cal')">&#9783; Calend&#225;rio</button>
@@ -145,10 +145,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;f
 </div>
 
 <div class="stats">
-  <div class="stat"><div class="stat-n" id="s-tot">—</div><div class="stat-l">eventos encontrados</div></div>
-  <div class="stat"><div class="stat-n" style="color:#a32d2d" id="s-urg">—</div><div class="stat-l">urgentes (&#8804;30 dias)</div></div>
-  <div class="stat"><div class="stat-n" style="color:#854f0b" id="s-bre">—</div><div class="stat-l">em breve (31&#8211;60 dias)</div></div>
-  <div class="stat"><div class="stat-n" style="color:#3b6d11" id="s-nor">—</div><div class="stat-l">programados</div></div>
+  <div class="stat"><div class="stat-n" id="s-tot">&#8212;</div><div class="stat-l">eventos encontrados</div></div>
+  <div class="stat"><div class="stat-n" style="color:#a32d2d" id="s-urg">&#8212;</div><div class="stat-l">urgentes (&#8804;30 dias)</div></div>
+  <div class="stat"><div class="stat-n" style="color:#854f0b" id="s-bre">&#8212;</div><div class="stat-l">em breve (31&#8211;60 dias)</div></div>
+  <div class="stat"><div class="stat-n" style="color:#3b6d11" id="s-nor">&#8212;</div><div class="stat-l">programados</div></div>
 </div>
 
 <div class="frow">
@@ -182,7 +182,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;f
   </div>
   <div class="cal-grid" id="cal-grid"></div>
 
-  <!-- Painel de detalhes do evento (aparece ao clicar no calendário) -->
   <div class="detail-panel" id="detail-panel">
     <button class="detail-close" onclick="closeDetail()" title="Fechar">&#10005;</button>
     <div class="detail-name" id="dp-nome"></div>
@@ -204,38 +203,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;f
   <span class="leg"><span class="ubadge u-normal">normal</span> &gt;60 dias</span>
 </div>
 
-</div><!-- .wrap -->
+</div>
 
 <script>
-/*
- * ═══════════════════════════════════════════════════════
- *  DADOS — substituídos pelo Claude ao gerar o arquivo
- *
- *  Campos obrigatórios:
- *    id, nome, setor, inicio (YYYY-MM-DD), fim (YYYY-MM-DD),
- *    local, link, urgencia ("urgente"|"breve"|"normal")
- *
- *  Campos opcionais:
- *    custo_participacao, custo_exposicao,
- *    publico_estimado, descricao
- *
- *  setor: "min"|"sid"|"met"|"pin"|"pap"|"pet"|"ter"
- * ═══════════════════════════════════════════════════════
- */
 const EVENTOS = [
   {
     id: 1,
-    nome: "MEC SHOW 2026 - Feira de Inovacao Industrial",
-    setor: "met",
+    nome: "MEC Show 2026",
+    setor: "pet",
     inicio: "2026-08-04",
     fim: "2026-08-06",
-    local: "Serra, ES",
-    link: "https://cimm.com.br/portal/eventos",
+    local: "Serra, ES (Pavilhao de Carapina)",
+    link: "https://mecshow.com.br",
     urgencia: "urgente",
-    publico_estimado: "A consultar",
-    custo_participacao: "A consultar",
-    custo_exposicao: "A consultar",
-    descricao: "Evento multissetorial: inovacao, energia, petroquimica, papel, celulose, siderurgia, metalurgia e mineracao."
+    publico_estimado: "20.000 visitantes, 330 marcas",
+    custo_participacao: "Gratuito (pre-cadastro)",
+    descricao: "Feira da Inovacao Industrial - oleo, gas, papel, celulose, siderurgia e petroquimica. Integrado ao ES OIL GAS ENERGY."
   },
   {
     id: 2,
@@ -243,27 +226,23 @@ const EVENTOS = [
     setor: "min",
     inicio: "2026-08-24",
     fim: "2026-08-27",
-    local: "Belo Horizonte, MG",
-    link: "https://exposibram2026.ibram.org.br/en/",
-    urgencia: "breve",
-    publico_estimado: "A consultar (100% dos estandes ocupados, +17.000 m2)",
-    custo_participacao: "Gratuito (visitante, mediante inscricao)",
-    custo_exposicao: "A consultar",
-    descricao: "Principal feira e congresso de mineracao da America Latina, com pauta de minerais criticos."
+    local: "Belo Horizonte, MG (Expominas)",
+    link: "https://exposibram2026.ibram.org.br/",
+    urgencia: "urgente",
+    publico_estimado: "86.000 visitantes",
+    custo_exposicao: "A partir de R$ 8.000/m2",
+    descricao: "Principal feira de mineracao da America Latina. 750+ expositores. Comemora 50 anos do IBRAM. Area 100% esgotada."
   },
   {
     id: 3,
-    nome: "ABM Week 2026",
+    nome: "ABM Week 10 - 10a edicao",
     setor: "sid",
     inicio: "2026-09-08",
     fim: "2026-09-10",
-    local: "Sao Paulo, SP",
+    local: "Sao Paulo, SP (Pro Magno Centro de Eventos)",
     link: "https://abmbrasil.com.br/evento/abm-week-10",
-    urgencia: "normal",
-    publico_estimado: "A consultar",
-    custo_participacao: "A consultar",
-    custo_exposicao: "A consultar",
-    descricao: "Principal evento tecnico-cientifico da America Latina em metalurgia, materiais e mineracao."
+    urgencia: "breve",
+    descricao: "Producao tecnico-cientifica em metalurgia, materiais e mineracao. Sessoes, plenarias, paineis e premiacoes."
   },
   {
     id: 4,
@@ -271,158 +250,66 @@ const EVENTOS = [
     setor: "met",
     inicio: "2026-09-15",
     fim: "2026-09-18",
-    local: "Joinville, SC",
-    link: "https://cimm.com.br/portal/eventos",
-    urgencia: "normal",
-    publico_estimado: "~120 expositores / 12.000 profissionais (est.)",
-    custo_participacao: "A consultar",
-    custo_exposicao: "A consultar",
-    descricao: "Feira e congresso de tecnologias em corte, conformacao, usinagem, soldagem e automacao."
+    local: "Joinville, SC (Expoville)",
+    link: "https://interform.com.br/",
+    urgencia: "breve",
+    publico_estimado: "15.000 profissionais",
+    custo_exposicao: "Consultar Messe Brasil",
+    descricao: "Feira Internacional de Corte, Conformacao, Usinagem, Soldagem e Automacao. 180 expositores nacionais e internacionais."
   },
   {
     id: 5,
-    nome: "Congresso Aco Brasil 2026",
-    setor: "sid",
-    inicio: "2026-09-29",
-    fim: "2026-09-30",
-    local: "Sao Paulo, SP",
-    link: "https://congressoacobrasil.org.br/en/",
-    urgencia: "normal",
-    publico_estimado: "A consultar",
-    custo_participacao: "A consultar",
-    custo_exposicao: "Nao aplicavel (congresso sem exposicao comercial)",
-    descricao: "36a edicao do principal forum de discussao do setor siderurgico brasileiro."
+    nome: "ROG.e 2026 - Rio Oil and Gas",
+    setor: "pet",
+    inicio: "2026-09-21",
+    fim: "2026-09-24",
+    local: "Rio de Janeiro, RJ (Riocentro)",
+    link: "https://roge.energy/",
+    urgencia: "breve",
+    publico_estimado: "75.000 participantes, 650 expositores",
+    descricao: "Maior festival de energia do planeta. Formato imersivo com exposicao, shows e debates estrategicos do setor de energia."
   },
   {
     id: 6,
-    nome: "ABTCP 2026 - 58 Congresso Internacional de Celulose e Papel",
-    setor: "pap",
-    inicio: "2026-10-06",
-    fim: "2026-10-08",
-    local: "Sao Paulo, SP",
-    link: "https://abtcp2026.org.br/",
-    urgencia: "normal",
-    publico_estimado: "Visitantes de +25 paises (est.)",
-    custo_participacao: "Gratuito (visitante)",
-    custo_exposicao: "A consultar (exposicao com +4.000 m2)",
-    descricao: "Maior evento de celulose e papel da America Latina."
+    nome: "Congresso Aco Brasil 2026 - 36a edicao",
+    setor: "sid",
+    inicio: "2026-09-29",
+    fim: "2026-09-30",
+    local: "Sao Paulo, SP (Transamerica Expo Center)",
+    link: "https://www.acobrasil.org.br/site/eventos/",
+    urgencia: "breve",
+    descricao: "Principal encontro da cadeia siderurgica nacional. Debates sobre cenarios, politicas e inovacao no setor do aco."
   },
   {
     id: 7,
-    nome: "Mercopar 2026",
+    nome: "ABTCP 2026 - 58o Congresso Internacional de Celulose e Papel",
+    setor: "pap",
+    inicio: "2026-10-06",
+    fim: "2026-10-08",
+    local: "Sao Paulo, SP (Transamerica Expo Center)",
+    link: "https://abtcp2026.org.br/",
+    urgencia: "normal",
+    publico_estimado: "3.000 participantes de 25+ paises",
+    custo_participacao: "R$ 800 a R$ 2.200",
+    custo_exposicao: "A partir de R$ 12.000",
+    descricao: "58o Congresso e Exposicao Internacional de Celulose e Papel. Foco em bioeconomia de base florestal."
+  },
+  {
+    id: 8,
+    nome: "Mercopar 2026 - 35a edicao",
     setor: "met",
     inicio: "2026-10-20",
     fim: "2026-10-23",
     local: "Caxias do Sul, RS",
-    link: "https://cimm.com.br/portal/eventos",
+    link: "https://mercopar.com.br/",
     urgencia: "normal",
-    publico_estimado: "A consultar",
-    custo_participacao: "A consultar",
-    custo_exposicao: "A consultar",
-    descricao: "Feira de inovacao industrial com foco em metalmecanico e manutencao industrial."
-  },
-  {
-    id: 8,
-    nome: "Arena M&T 2026",
-    setor: "min",
-    inicio: "2026-10-21",
-    fim: "2026-10-23",
-    local: "Fazenda Rio Grande, PR",
-    link: "https://arenamt.com.br/",
-    urgencia: "normal",
-    publico_estimado: "A consultar",
-    custo_participacao: "A consultar",
-    custo_exposicao: "A consultar",
-    descricao: "Evento itinerante de construcao e mineracao, ano intercalar ao M&T Expo."
-  },
-  {
-    id: 9,
-    nome: "Alacero Summit 2026",
-    setor: "sid",
-    inicio: "2026-11-10",
-    fim: "2026-11-11",
-    local: "Cidade do Mexico, Mexico",
-    link: "https://www.acobrasil.org.br/site/eventos/",
-    urgencia: "normal",
-    publico_estimado: "A consultar",
-    custo_participacao: "A consultar",
-    custo_exposicao: "Nao aplicavel (cupula/congresso)",
-    descricao: "Cupula siderurgica latino-americana, com apoio do Instituto Aco Brasil."
-  },
-  {
-    id: 10,
-    nome: "Expomin 2027",
-    setor: "min",
-    inicio: "2027-04-20",
-    fim: "2027-04-24",
-    local: "Santiago, Chile",
-    link: "https://www.expomin.cl/",
-    urgencia: "normal",
-    publico_estimado: "83.498 visitantes na edicao 2025 (est.)",
-    custo_participacao: "A consultar",
-    custo_exposicao: "A consultar",
-    descricao: "Maior feira de mineracao da America Latina, com Uniao Europeia como convidada especial em 2027."
-  },
-  {
-    id: 11,
-    nome: "Brasmin 2027",
-    setor: "min",
-    inicio: "2027-06-15",
-    fim: "2027-06-17",
-    local: "Sao Paulo, SP",
-    link: "https://brasmin.com.br",
-    urgencia: "normal",
-    publico_estimado: "A consultar",
-    custo_participacao: "A consultar",
-    custo_exposicao: "A consultar",
-    descricao: "Feira de mineracao em Sao Paulo."
-  },
-  {
-    id: 12,
-    nome: "Abrafati Show 2027 - Congresso Internacional de Tintas",
-    setor: "pin",
-    inicio: "2027-09-01",
-    fim: "2027-09-03",
-    local: "Sao Paulo, SP",
-    link: "https://www.abrafatishow.com.br/",
-    urgencia: "normal",
-    publico_estimado: "A consultar",
-    custo_participacao: "A consultar",
-    custo_exposicao: "A consultar",
-    descricao: "Evento bienal de tintas e revestimentos industriais (data exata a confirmar)."
-  },
-  {
-    id: 13,
-    nome: "EXPOSIBRAM 2027",
-    setor: "min",
-    inicio: "2027-09-20",
-    fim: "2027-09-23",
-    local: "Belem, PA",
-    link: "https://ibram.org.br/eventos/",
-    urgencia: "normal",
-    publico_estimado: "A consultar",
-    custo_participacao: "A consultar",
-    custo_exposicao: "A consultar (novas regras de associacao IBRAM)",
-    descricao: "Edicao 2027 do maior evento de mineracao da America Latina, em Belem."
-  },
-  {
-    id: 14,
-    nome: "M&T Expo 2027",
-    setor: "min",
-    inicio: "2027-11-16",
-    fim: "2027-11-19",
-    local: "Sao Paulo, SP",
-    link: "https://www.mtexpo.com.br/",
-    urgencia: "normal",
-    publico_estimado: "~500 empresas / +2.000 marcas (edicao 2024, est.)",
-    custo_participacao: "A consultar",
-    custo_exposicao: "A consultar",
-    descricao: "Maior feira de maquinas e equipamentos para construcao e mineracao da America Latina."
+    publico_estimado: "40.000 visitantes",
+    custo_participacao: "Gratuito (pre-inscricao)",
+    descricao: "Maior feira de inovacao industrial da America Latina. 500+ expositores. Foco em industria 4.0 e metal-mecanica."
   }
 ];
-const DATA_GERACAO = "06/07/2026";
+const DATA_GERACAO = "03/08/2026";
 
-/* ─── MAPA DE SETORES ──────────────────────── */
 const S = {
   min:{l:'Mineração',        bg:'#e6f1fb',tx:'#0c447c',dt:'#378add'},
   sid:{l:'Siderurgia',       bg:'#eaf3de',tx:'#27500a',dt:'#639922'},
@@ -439,7 +326,6 @@ let view='cal', calY, calM;
 let ativos=new Set(['all']);
 const hoje=new Date(); hoje.setHours(0,0,0,0);
 
-/* ─── INIT ─────────────────────────────────── */
 (function(){
   const prox=EVENTOS.map(e=>pd(e.inicio)).filter(d=>d>=hoje).sort((a,b)=>a-b);
   const ref=prox.length?prox[0]:hoje;
@@ -450,11 +336,9 @@ const hoje=new Date(); hoje.setHours(0,0,0,0);
   render();
 })();
 
-/* ─── HELPERS ──────────────────────────────── */
 function pd(s){const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d);}
 function fs(d){return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});}
 
-/* ─── FILTRO ───────────────────────────────── */
 function getFilt(){
   const u=document.getElementById('furg').value;
   const q=document.getElementById('fsearch').value.toLowerCase().trim();
@@ -466,7 +350,6 @@ function getFilt(){
   });
 }
 
-/* ─── CONTROLES ────────────────────────────── */
 function setView(v){
   view=v;
   document.getElementById('vcal').style.display=v==='cal'?'':'none';
@@ -494,7 +377,6 @@ function chMes(d){
   render();
 }
 
-/* ─── PAINEL DE DETALHES ───────────────────── */
 function openDetail(id){
   const ev=EVENTOS.find(e=>e.id===id);
   if(!ev)return;
@@ -503,18 +385,12 @@ function openDetail(id){
   const ul=ev.urgencia==='urgente'?'Urgente':ev.urgencia==='breve'?'Em breve':'Normal';
   const sd=pd(ev.inicio),ed=pd(ev.fim);
   const dr=sd.getTime()===ed.getTime()?fs(sd):`${fs(sd)} a ${fs(ed)}`;
-
-  /* nome */
   document.getElementById('dp-nome').textContent=ev.nome;
-
-  /* badges */
   document.getElementById('dp-badges').innerHTML=
     `<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:99px;font-size:12px;background:${sx.bg};color:${sx.tx}">
        <span style="width:7px;height:7px;border-radius:50%;background:${sx.dt};display:inline-block"></span>${sx.l}
      </span>
      <span class="ubadge ${ub}">${ul}</span>`;
-
-  /* campos */
   const fields=[
     {l:'Data',v:dr},
     {l:'Local',v:ev.local},
@@ -525,34 +401,25 @@ function openDetail(id){
   document.getElementById('dp-grid').innerHTML=fields.map(f=>
     `<div class="detail-field"><div class="detail-label">${f.l}</div><div class="detail-value">${f.v}</div></div>`
   ).join('');
-
-  /* descrição */
   const descEl=document.getElementById('dp-desc');
   if(ev.descricao){descEl.textContent=ev.descricao;descEl.style.display='';}
   else{descEl.style.display='none';}
-
-  /* link */
   const linkEl=document.getElementById('dp-link');
   if(ev.link&&ev.link!=='#'){
     linkEl.innerHTML=`<a href="${ev.link}" class="detail-link" target="_blank" rel="noopener">Ver site oficial &#8599;</a>`;
   } else {
     linkEl.innerHTML='';
   }
-
-  /* cor da borda esquerda */
   const panel=document.getElementById('detail-panel');
   panel.style.borderLeftColor=sx.dt;
-  panel.style.backgroundColor=sx.bg+'33'; /* 20% opacity */
+  panel.style.backgroundColor=sx.bg+'33';
   panel.classList.add('open');
-
-  /* rola para o painel */
   panel.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 function closeDetail(){
   document.getElementById('detail-panel').classList.remove('open');
 }
 
-/* ─── RENDER ───────────────────────────────── */
 function render(){
   const f=getFilt();
   document.getElementById('s-tot').textContent=f.length;
@@ -593,7 +460,7 @@ function rList(f){
     const ub=ev.urgencia==='urgente'?'u-urgente':ev.urgencia==='breve'?'u-breve':'u-normal';
     const ul=ev.urgencia==='urgente'?'urgente':ev.urgencia==='breve'?'em breve':'normal';
     const sd=pd(ev.inicio),ed=pd(ev.fim);
-    const dr=sd.getTime()===ed.getTime()?fs(sd):`${fs(sd)} – ${fs(ed)}`;
+    const dr=sd.getTime()===ed.getTime()?fs(sd):`${fs(sd)} - ${fs(ed)}`;
     const extras=[
       ev.publico_estimado?`&#128100; ${ev.publico_estimado}`:'',
       ev.custo_participacao?`Participar: ${ev.custo_participacao}`:'',
