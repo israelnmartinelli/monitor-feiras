@@ -8,16 +8,22 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:14px;color:#1a1a1a;background:#fff;padding:16px;line-height:1.5}
 .wrap{max-width:900px;margin:0 auto}
+
+/* Header */
 .hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding-bottom:12px;border-bottom:1px solid #e5e5e5;margin-bottom:16px;flex-wrap:wrap}
 .hdr-title{font-size:18px;font-weight:500}
 .hdr-sub{font-size:12px;color:#888;margin-top:3px}
 .view-tgl{display:flex;gap:4px;flex-shrink:0}
 .vbtn{padding:5px 12px;font-size:12px;border:1px solid #ddd;border-radius:6px;background:transparent;color:#666;cursor:pointer;transition:all .15s}
 .vbtn.active{background:#f0f0f0;color:#1a1a1a;border-color:#bbb}
+
+/* Stats */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
 .stat{background:#f8f8f7;border-radius:8px;padding:10px 12px}
 .stat-n{font-size:22px;font-weight:500}
 .stat-l{font-size:11px;color:#888;margin-top:2px}
+
+/* Filters */
 .frow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
 .flbl{font-size:12px;color:#888;white-space:nowrap}
 .chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;font-size:12px;border-radius:99px;border:1px solid #e0e0e0;cursor:pointer;transition:all .15s;color:#666;background:transparent;white-space:nowrap}
@@ -36,6 +42,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;f
 .d-pin{background:#d85a30}.d-pap{background:#1d9e75}.d-pet{background:#ba7517}.d-ter{background:#d4537e}
 .fsel,.fsearch{padding:5px 8px;font-size:12px;border:1px solid #e0e0e0;border-radius:6px;background:transparent;color:#1a1a1a}
 .fsearch{width:160px}.fsearch::placeholder{color:#aaa}
+
+/* Calendar */
 .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .cal-nav-title{font-size:14px;font-weight:500}
 .cal-nav-btn{padding:3px 10px;font-size:12px;border:1px solid #e0e0e0;border-radius:6px;background:transparent;color:#666;cursor:pointer}
@@ -49,10 +57,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;f
 .cal-pill{display:block;font-size:10px;padding:2px 5px;border-radius:3px;margin-bottom:2px;white-space:normal;word-break:break-word;overflow-wrap:break-word;cursor:pointer;line-height:1.4;transition:opacity .1s}
 .cal-pill:hover{opacity:.8}
 .cal-more{font-size:10px;color:#aaa;margin-top:1px}
-.detail-panel{display:none;border-radius:10px;border:1px solid #e0e0e0;border-left:4px solid #999;background:#fff;padding:16px 18px;margin:12px 0;position:relative;animation:slideIn .15s ease}
+
+/* ── PAINEL DE DETALHES ───────────────────────── */
+.detail-panel{
+  display:none;
+  border-radius:10px;
+  border:1px solid #e0e0e0;
+  border-left:4px solid #999;
+  background:#fff;
+  padding:16px 18px;
+  margin:12px 0;
+  position:relative;
+  animation:slideIn .15s ease;
+}
 .detail-panel.open{display:block}
 @keyframes slideIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-.detail-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid #e0e0e0;background:transparent;cursor:pointer;font-size:14px;color:#888;display:flex;align-items:center;justify-content:center;transition:all .15s;line-height:1}
+.detail-close{
+  position:absolute;top:12px;right:12px;
+  width:26px;height:26px;border-radius:50%;
+  border:1px solid #e0e0e0;background:transparent;
+  cursor:pointer;font-size:14px;color:#888;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;line-height:1
+}
 .detail-close:hover{background:#f5f5f5;color:#1a1a1a}
 .detail-name{font-size:16px;font-weight:500;margin-bottom:8px;padding-right:36px}
 .detail-badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
@@ -61,8 +88,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;f
 .detail-label{font-size:11px;color:#888;margin-bottom:2px;text-transform:uppercase;letter-spacing:.03em;font-weight:500}
 .detail-value{color:#1a1a1a}
 .detail-desc{font-size:13px;color:#555;border-top:1px solid #f0f0f0;padding-top:10px;margin-top:4px}
-.detail-link{display:inline-flex;align-items:center;gap:5px;margin-top:10px;padding:5px 14px;font-size:12px;border:1px solid #ddd;border-radius:6px;color:#1a1a1a;text-decoration:none;background:transparent;transition:all .15s}
+.detail-link{
+  display:inline-flex;align-items:center;gap:5px;
+  margin-top:10px;padding:5px 14px;
+  font-size:12px;border:1px solid #ddd;border-radius:6px;
+  color:#1a1a1a;text-decoration:none;background:transparent;
+  transition:all .15s
+}
 .detail-link:hover{background:#f5f5f5;border-color:#bbb}
+
+/* List */
 .evtlist{display:flex;flex-direction:column;gap:8px;margin-top:12px}
 .ecard{background:#fff;border:1px solid #eee;border-radius:10px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start;transition:border-color .15s;cursor:default}
 .ecard:hover{border-color:#ccc}
@@ -80,30 +115,42 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;f
 .einfo{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:#666;margin-top:2px}
 .elink{font-size:13px;color:#666;padding:4px 6px;border-radius:6px;text-decoration:none;flex-shrink:0;align-self:flex-start;border:1px solid transparent;transition:all .15s;line-height:1}
 .elink:hover{border-color:#e0e0e0;color:#1a1a1a}
+
+/* Empty */
 .empty{text-align:center;color:#aaa;font-size:13px;padding:2.5rem 0}
+
+/* Legend */
 .legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;padding-top:12px;border-top:1px solid #f0f0f0;font-size:11px;color:#888}
 .leg{display:flex;align-items:center;gap:5px}
-@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.hdr{flex-direction:column}.detail-grid{grid-template-columns:1fr}}
+
+@media(max-width:600px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .hdr{flex-direction:column}
+  .detail-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
+
 <div class="hdr">
   <div>
     <div class="hdr-title">&#128197; Calend&#225;rio de Feiras e Eventos Industriais</div>
-    <div class="hdr-sub" id="sub">&#8212;</div>
+    <div class="hdr-sub" id="sub">—</div>
   </div>
   <div class="view-tgl">
     <button class="vbtn active" id="btn-cal" onclick="setView('cal')">&#9783; Calend&#225;rio</button>
     <button class="vbtn" id="btn-list" onclick="setView('list')">&#9776; Lista</button>
   </div>
 </div>
+
 <div class="stats">
-  <div class="stat"><div class="stat-n" id="s-tot">&#8212;</div><div class="stat-l">eventos encontrados</div></div>
-  <div class="stat"><div class="stat-n" style="color:#a32d2d" id="s-urg">&#8212;</div><div class="stat-l">urgentes (&#8804;30 dias)</div></div>
-  <div class="stat"><div class="stat-n" style="color:#854f0b" id="s-bre">&#8212;</div><div class="stat-l">em breve (31&#8211;60 dias)</div></div>
-  <div class="stat"><div class="stat-n" style="color:#3b6d11" id="s-nor">&#8212;</div><div class="stat-l">programados</div></div>
+  <div class="stat"><div class="stat-n" id="s-tot">—</div><div class="stat-l">eventos encontrados</div></div>
+  <div class="stat"><div class="stat-n" style="color:#a32d2d" id="s-urg">—</div><div class="stat-l">urgentes (&#8804;30 dias)</div></div>
+  <div class="stat"><div class="stat-n" style="color:#854f0b" id="s-bre">—</div><div class="stat-l">em breve (31&#8211;60 dias)</div></div>
+  <div class="stat"><div class="stat-n" style="color:#3b6d11" id="s-nor">—</div><div class="stat-l">programados</div></div>
 </div>
+
 <div class="frow">
   <span class="flbl">Setor:</span>
   <button class="chip chip-all active" data-s="all" onclick="toggleSetor(this)">Todos</button>
@@ -126,6 +173,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;f
   <span class="flbl" style="margin-left:8px">Buscar:</span>
   <input class="fsearch" type="text" id="fsearch" placeholder="Nome do evento..." oninput="render()">
 </div>
+
 <div id="vcal">
   <div class="cal-nav">
     <button class="cal-nav-btn" onclick="chMes(-1)">&#8592; anterior</button>
@@ -133,6 +181,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;f
     <button class="cal-nav-btn" onclick="chMes(1)">pr&#243;ximo &#8594;</button>
   </div>
   <div class="cal-grid" id="cal-grid"></div>
+
+  <!-- Painel de detalhes do evento (aparece ao clicar no calendário) -->
   <div class="detail-panel" id="detail-panel">
     <button class="detail-close" onclick="closeDetail()" title="Fechar">&#10005;</button>
     <div class="detail-name" id="dp-nome"></div>
@@ -142,102 +192,117 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;f
     <div id="dp-link"></div>
   </div>
 </div>
+
 <div id="vlist" style="display:none">
   <div class="evtlist" id="evtlist"></div>
 </div>
+
 <div class="legend">
   <strong style="margin-right:4px">Urg&#234;ncia:</strong>
   <span class="leg"><span class="ubadge u-urgente">urgente</span> &#8804;30 dias</span>
   <span class="leg"><span class="ubadge u-breve">em breve</span> 31&#8211;60 dias</span>
   <span class="leg"><span class="ubadge u-normal">normal</span> &gt;60 dias</span>
 </div>
-</div>
+
+</div><!-- .wrap -->
+
 <script>
+/*
+ * ═══════════════════════════════════════════════════════
+ *  DADOS — substituídos pelo Claude ao gerar o arquivo
+ *
+ *  Campos obrigatórios:
+ *    id, nome, setor, inicio (YYYY-MM-DD), fim (YYYY-MM-DD),
+ *    local, link, urgencia ("urgente"|"breve"|"normal")
+ *
+ *  Campos opcionais:
+ *    custo_participacao, custo_exposicao,
+ *    publico_estimado, descricao
+ *
+ *  setor: "min"|"sid"|"met"|"pin"|"pap"|"pet"|"ter"
+ * ═══════════════════════════════════════════════════════
+ */
 const EVENTOS = [
-  { id:1, nome:"EXPOSIBRAM 2026", setor:"min", inicio:"2026-08-24", fim:"2026-08-27",
-    local:"Belo Horizonte, MG (Expominas)", link:"https://exposibram2026.ibram.org.br/",
-    urgencia:"urgente", publico_estimado:"86.000 visitantes",
-    custo_exposicao:"A partir de R$ 8.000/m2 (esgotado)",
-    descricao:"Principal feira de mineracao da America Latina. 750+ expositores. Comemora 50 anos do IBRAM." },
-  { id:2, nome:"ABM Week 10 - 10a edicao", setor:"sid", inicio:"2026-09-08", fim:"2026-09-10",
+  { id:1, nome:"ABM Week 10 - 10a edicao", setor:"sid", inicio:"2026-09-08", fim:"2026-09-10",
     local:"Sao Paulo, SP (Pro Magno Centro de Eventos)", link:"https://abmbrasil.com.br/evento/abm-week-10",
     urgencia:"urgente",
     descricao:"Producao tecnico-cientifica em metalurgia, materiais e mineracao. Sessoes, plenarias, paineis e premiacoes." },
-  { id:3, nome:"Interform 2026", setor:"met", inicio:"2026-09-15", fim:"2026-09-18",
+  { id:2, nome:"Interform 2026", setor:"met", inicio:"2026-09-15", fim:"2026-09-18",
     local:"Joinville, SC (Expoville)", link:"https://interform.com.br/",
-    urgencia:"urgente", publico_estimado:"15.000 profissionais",
+    urgencia:"urgente", publico_estimado:"15.000 profissionais (est.)",
     custo_exposicao:"Consultar Messe Brasil",
     descricao:"Feira Internacional de Corte, Conformacao, Usinagem, Soldagem e Automacao. 180 expositores." },
-  { id:4, nome:"ROG.e 2026 - Rio Oil and Gas", setor:"pet", inicio:"2026-09-21", fim:"2026-09-24",
+  { id:3, nome:"ROG.e 2026 - Rio Oil and Gas", setor:"pet", inicio:"2026-09-21", fim:"2026-09-24",
     local:"Rio de Janeiro, RJ (Riocentro)", link:"https://roge.energy/",
-    urgencia:"breve", publico_estimado:"75.000 participantes, 650 expositores",
+    urgencia:"urgente", publico_estimado:"75.000 participantes, 650 expositores",
     descricao:"Maior festival de energia do planeta. Formato imersivo com exposicao, shows e debates estrategicos." },
-  { id:5, nome:"Congresso Aco Brasil 2026 - 36a edicao", setor:"sid", inicio:"2026-09-29", fim:"2026-09-30",
+  { id:4, nome:"Congresso Aco Brasil 2026 - 36a edicao", setor:"sid", inicio:"2026-09-29", fim:"2026-09-30",
     local:"Sao Paulo, SP (Transamerica Expo Center)", link:"https://www.acobrasil.org.br/site/eventos/",
-    urgencia:"breve",
+    urgencia:"urgente",
     descricao:"Principal encontro da cadeia siderurgica nacional. Debates sobre cenarios, politicas e inovacao no aco." },
-  { id:6, nome:"26a Conferencia del Acero IAS e EXPO IAS 2026", setor:"sid", inicio:"2026-10-06", fim:"2026-10-08",
+  { id:5, nome:"26a Conferencia del Acero IAS e EXPO IAS 2026", setor:"sid", inicio:"2026-10-06", fim:"2026-10-08",
     local:"Rosario, Santa Fe, Argentina (City Center Rosario)", link:"https://www.siderurgia.org.ar/Conf26/home.html",
-    urgencia:"breve", publico_estimado:"A consultar",
+    urgencia:"breve",
     custo_participacao:"Full Pass US$ 700/800 (socio IAS) - US$ 800/900 (nao-socio); early bird ate 04/09/2026",
     descricao:"Conferencia e feira (EXPO IAS 2026) do Instituto Argentino de Siderurgia. Cursos pre-conferencia em 05/10 e visitas a plantas (Ternium, Acindar, Gerdau) em 09/10." },
-  { id:7, nome:"ABTCP 2026 - 58o Congresso de Celulose e Papel", setor:"pap", inicio:"2026-10-06", fim:"2026-10-08",
+  { id:6, nome:"ABTCP 2026 - 58o Congresso de Celulose e Papel", setor:"pap", inicio:"2026-10-06", fim:"2026-10-08",
     local:"Sao Paulo, SP (Transamerica Expo Center)", link:"https://abtcp2026.org.br/",
     urgencia:"breve", publico_estimado:"3.000 participantes de 25+ paises",
     custo_participacao:"R$ 800 a R$ 2.200", custo_exposicao:"A partir de R$ 12.000",
-    descricao:"58o Congresso e Exposicao Internacional de Celulose e Papel. Foco em bioeconomia de base florestal." },
-  { id:8, nome:"Mercopar 2026 - 35a edicao", setor:"met", inicio:"2026-10-20", fim:"2026-10-23",
+    descricao:"58o Congresso e Exposicao Internacional de Celulose e Papel. Foco em bioeconomia de base florestal. Exposicao com todos os estandes reservados." },
+  { id:7, nome:"Mercopar 2026 - 35a edicao", setor:"met", inicio:"2026-10-20", fim:"2026-10-23",
     local:"Caxias do Sul, RS", link:"https://mercopar.com.br/",
-    urgencia:"breve", publico_estimado:"40.000 visitantes",
-    custo_participacao:"Gratuito (pre-inscricao)",
-    descricao:"Maior feira de inovacao industrial da America Latina. 500+ expositores. Foco em industria 4.0." },
-  { id:9, nome:"Arena M e T 2026", setor:"min", inicio:"2026-10-21", fim:"2026-10-23",
+    urgencia:"breve", publico_estimado:"40.000 visitantes (est.)",
+    custo_participacao:"Gratuito (pre-inscricao, est.)",
+    descricao:"Maior feira de inovacao industrial da America Latina. 500+ expositores (est.). Foco em industria 4.0." },
+  { id:8, nome:"Arena M e T 2026", setor:"min", inicio:"2026-10-21", fim:"2026-10-23",
     local:"Fazenda Rio Grande, PR", link:"https://arenamt.com.br/",
-    urgencia:"normal",
+    urgencia:"breve",
     descricao:"Feira itinerante de maquinas e tratores para mineracao e construcao. Evento intercalar ao M e T Expo." },
-  { id:10, nome:"Alacero Summit 2026", setor:"sid", inicio:"2026-11-10", fim:"2026-11-11",
-    local:"Cidade do Mexico, Mexico", link:"https://summit.alacero.org/en.html",
+  { id:9, nome:"Alacero Summit 2026", setor:"sid", inicio:"2026-11-10", fim:"2026-11-11",
+    local:"Hotel Camino Real Polanco, Cidade do Mexico, Mexico", link:"https://summit.alacero.org/en.html",
     urgencia:"normal",
     descricao:"Cupula da industria siderurgica da America Latina. Com apoio do Instituto Aco Brasil." },
-  { id:11, nome:"Expomin 2027", setor:"min", inicio:"2027-04-20", fim:"2027-04-24",
-    local:"Espacio Riesco, Santiago, Chile", link:"https://www.expomin.cl/",
-    urgencia:"normal", publico_estimado:"83.000+ visitantes (ed. 2025)",
-    descricao:"Principal feira de mineracao da America Latina. Foco em minerais criticos e terras raras em 2027. UE convidada especial." },
-  { id:12, nome:"Brasmin 2027", setor:"min", inicio:"2027-06-15", fim:"2027-06-17",
-    local:"Sao Paulo Expo, Sao Paulo, SP", link:"https://brasmin.com.br",
-    urgencia:"normal",
-    descricao:"Feira brasileira de mineracao em anos alternativos ao EXPOSIBRAM." },
-  { id:13, nome:"Abrafati Show 2027", setor:"pin", inicio:"2027-09-15", fim:"2027-09-15",
-    local:"Sao Paulo Expo, Sao Paulo, SP", link:"https://www.abrafatishow.com.br/",
-    urgencia:"normal",
-    descricao:"Congresso Internacional de Tintas e Revestimentos. Bienal. Data exata a confirmar em 2027. Data no calendario e estimativa." },
-  { id:14, nome:"EXPOSIBRAM 2027", setor:"min", inicio:"2027-09-20", fim:"2027-09-23",
-    local:"Belem, PA", link:"https://ibram.org.br/eventos/",
-    urgencia:"normal",
-    descricao:"Expo e Congresso Brasileiro de Mineracao 2027. Contexto da COP30 em Belem." },
-  { id:15, nome:"M e T Expo 2027", setor:"min", inicio:"2027-11-16", fim:"2027-11-19",
-    local:"Sao Paulo Expo, Sao Paulo, SP", link:"https://www.mtexpo.com.br/",
-    urgencia:"normal", publico_estimado:"500+ empresas, 2.000+ marcas",
-    descricao:"Maior feira de maquinas para mineracao e construcao do hemisferio sul. R$ 9 bi em negocios (ed. 2024)." },
-  { id:16, nome:"MINEXCHANGE - SME Annual Conference 2027", setor:"min", inicio:"2027-02-28", fim:"2027-03-03",
+  { id:10, nome:"MINEXCHANGE - SME Annual Conference 2027", setor:"min", inicio:"2027-02-28", fim:"2027-03-03",
     local:"Denver, CO, EUA (Colorado Convention Center)", link:"https://smeannualconference.org/",
     urgencia:"normal",
-    descricao:"Principal conferencia anual de mineracao e metalurgia dos EUA. Organizacao: Society for Mining, Metallurgy & Exploration (SME)." },
-  { id:17, nome:"PDAC 2027", setor:"min", inicio:"2027-03-07", fim:"2027-03-10",
+    descricao:"Principal conferencia anual de mineracao e metalurgia dos EUA. Organizacao: Society for Mining, Metallurgy and Exploration (SME). Call for Abstracts aberto." },
+  { id:11, nome:"PDAC 2027", setor:"min", inicio:"2027-03-07", fim:"2027-03-10",
     local:"Toronto, ON, Canada (Metro Toronto Convention Centre)", link:"https://pdac.ca/convention-2027",
-    urgencia:"normal", publico_estimado:"32.000+ participantes de 140+ paises (ed. 2026)",
-    descricao:"Maior convencao de exploracao mineral e mineracao do mundo. Organizacao: Prospectors & Developers Association of Canada." },
-  { id:18, nome:"CIM Connect 2027", setor:"min", inicio:"2027-05-02", fim:"2027-05-05",
+    urgencia:"normal", publico_estimado:"32.155 participantes de 140+ paises (recorde, ed. 2026)",
+    descricao:"Maior convencao de exploracao mineral e mineracao do mundo. Organizacao: Prospectors and Developers Association of Canada." },
+  { id:12, nome:"Expomin 2027", setor:"min", inicio:"2027-04-20", fim:"2027-04-24",
+    local:"Espacio Riesco, Santiago, Chile", link:"https://www.expomin.cl/",
+    urgencia:"normal", publico_estimado:"83.000+ visitantes (ed. 2025)",
+    descricao:"Principal feira de mineracao da America Latina. Foco em minerais criticos e terras raras em 2027. Uniao Europeia convidada especial." },
+  { id:13, nome:"CIM Connect 2027", setor:"min", inicio:"2027-05-02", fim:"2027-05-05",
     local:"Montreal, QC, Canada (Palais des Congres)", link:"https://convention.cim.org/",
     urgencia:"normal",
     descricao:"Principal convencao canadense de mineracao, metalurgia e petroleo. Organizacao: Canadian Institute of Mining, Metallurgy and Petroleum (CIM)." },
-  { id:19, nome:"AISTech 2027", setor:"sid", inicio:"2027-05-03", fim:"2027-05-05",
+  { id:14, nome:"AISTech 2027", setor:"sid", inicio:"2027-05-03", fim:"2027-05-05",
     local:"Nashville, TN, EUA (Music City Center)", link:"https://www.aist.org/conferences-expositions/aistech/home",
     urgencia:"normal",
-    descricao:"Principal conferencia e exposicao tecnica de siderurgia dos EUA. Organizacao: Association for Iron & Steel Technology (AIST)." }
+    descricao:"Principal conferencia e exposicao tecnica de siderurgia dos EUA. Organizacao: Association for Iron and Steel Technology (AIST). Inscricoes abrem em 07/12/2026." },
+  { id:15, nome:"Brasmin 2027", setor:"min", inicio:"2027-06-15", fim:"2027-06-17",
+    local:"Sao Paulo Expo, Sao Paulo, SP", link:"https://brasmin.com.br",
+    urgencia:"normal",
+    descricao:"Feira brasileira de mineracao em anos alternativos ao EXPOSIBRAM." },
+  { id:16, nome:"EXPOSIBRAM 2027", setor:"min", inicio:"2027-09-20", fim:"2027-09-23",
+    local:"Belem, PA (Hangar Centro de Convencoes e Feiras da Amazonia)", link:"https://ibram.org.br/eventos/",
+    urgencia:"normal",
+    descricao:"Expo e Congresso Brasileiro de Mineracao 2027. Lancamento oficial ja realizado pelo IBRAM em Belem. Contexto da COP30." },
+  { id:17, nome:"Abrafati Show 2027", setor:"pin", inicio:"2027-09-28", fim:"2027-09-30",
+    local:"Sao Paulo Expo, Sao Paulo, SP", link:"https://home.abrafatishow.com.br/en/",
+    urgencia:"normal", publico_estimado:"~13.000 visitantes, ~240 expositores (est.)",
+    descricao:"Congresso Internacional de Tintas e Revestimentos. Bienal. Data oficialmente confirmada (28-30/09/2027)." },
+  { id:18, nome:"M e T Expo 2027", setor:"min", inicio:"2027-11-16", fim:"2027-11-19",
+    local:"Sao Paulo Expo, Sao Paulo, SP", link:"https://www.mtexpo.com.br/",
+    urgencia:"normal", publico_estimado:"500+ empresas, 2.000+ marcas (est.)",
+    descricao:"Maior feira de maquinas para mineracao e construcao do hemisferio sul. 13a edicao, parte da bauma NETWORK." }
 ];
-const DATA_GERACAO = "21/08/2026";
+const DATA_GERACAO = "01/09/2026";
 
+/* ─── MAPA DE SETORES ──────────────────────── */
 const S = {
   min:{l:'Mineração',        bg:'#e6f1fb',tx:'#0c447c',dt:'#378add'},
   sid:{l:'Siderurgia',       bg:'#eaf3de',tx:'#27500a',dt:'#639922'},
@@ -247,13 +312,14 @@ const S = {
   pet:{l:'Petroquímica',     bg:'#faeeda',tx:'#633806',dt:'#ba7517'},
   ter:{l:'Terras Raras',     bg:'#fbeaf0',tx:'#72243e',dt:'#d4537e'}
 };
-const MESES=[`Janeiro`,`Fevereiro`,`Março`,`Abril`,`Maio`,`Junho`,`Julho`,`Agosto`,`Setembro`,`Outubro`,`Novembro`,`Dezembro`];
+const MESES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 const DIAS=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
 
 let view='cal', calY, calM;
 let ativos=new Set(['all']);
 const hoje=new Date(); hoje.setHours(0,0,0,0);
 
+/* ─── INIT ─────────────────────────────────── */
 (function(){
   const prox=EVENTOS.map(e=>pd(e.inicio)).filter(d=>d>=hoje).sort((a,b)=>a-b);
   const ref=prox.length?prox[0]:hoje;
@@ -264,9 +330,11 @@ const hoje=new Date(); hoje.setHours(0,0,0,0);
   render();
 })();
 
+/* ─── HELPERS ──────────────────────────────── */
 function pd(s){const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d);}
 function fs(d){return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});}
 
+/* ─── FILTRO ───────────────────────────────── */
 function getFilt(){
   const u=document.getElementById('furg').value;
   const q=document.getElementById('fsearch').value.toLowerCase().trim();
@@ -278,6 +346,7 @@ function getFilt(){
   });
 }
 
+/* ─── CONTROLES ────────────────────────────── */
 function setView(v){
   view=v;
   document.getElementById('vcal').style.display=v==='cal'?'':'none';
@@ -305,6 +374,7 @@ function chMes(d){
   render();
 }
 
+/* ─── PAINEL DE DETALHES ───────────────────── */
 function openDetail(id){
   const ev=EVENTOS.find(e=>e.id===id);
   if(!ev)return;
@@ -313,12 +383,18 @@ function openDetail(id){
   const ul=ev.urgencia==='urgente'?'Urgente':ev.urgencia==='breve'?'Em breve':'Normal';
   const sd=pd(ev.inicio),ed=pd(ev.fim);
   const dr=sd.getTime()===ed.getTime()?fs(sd):`${fs(sd)} a ${fs(ed)}`;
+
+  /* nome */
   document.getElementById('dp-nome').textContent=ev.nome;
+
+  /* badges */
   document.getElementById('dp-badges').innerHTML=
     `<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:99px;font-size:12px;background:${sx.bg};color:${sx.tx}">
        <span style="width:7px;height:7px;border-radius:50%;background:${sx.dt};display:inline-block"></span>${sx.l}
      </span>
      <span class="ubadge ${ub}">${ul}</span>`;
+
+  /* campos */
   const fields=[
     {l:'Data',v:dr},
     {l:'Local',v:ev.local},
@@ -329,21 +405,34 @@ function openDetail(id){
   document.getElementById('dp-grid').innerHTML=fields.map(f=>
     `<div class="detail-field"><div class="detail-label">${f.l}</div><div class="detail-value">${f.v}</div></div>`
   ).join('');
+
+  /* descrição */
   const descEl=document.getElementById('dp-desc');
   if(ev.descricao){descEl.textContent=ev.descricao;descEl.style.display='';}
   else{descEl.style.display='none';}
+
+  /* link */
   const linkEl=document.getElementById('dp-link');
   if(ev.link&&ev.link!=='#'){
     linkEl.innerHTML=`<a href="${ev.link}" class="detail-link" target="_blank" rel="noopener">Ver site oficial &#8599;</a>`;
-  } else {linkEl.innerHTML='';}
+  } else {
+    linkEl.innerHTML='';
+  }
+
+  /* cor da borda esquerda */
   const panel=document.getElementById('detail-panel');
   panel.style.borderLeftColor=sx.dt;
-  panel.style.backgroundColor=sx.bg+'33';
+  panel.style.backgroundColor=sx.bg+'33'; /* 20% opacity */
   panel.classList.add('open');
+
+  /* rola para o painel */
   panel.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-function closeDetail(){document.getElementById('detail-panel').classList.remove('open');}
+function closeDetail(){
+  document.getElementById('detail-panel').classList.remove('open');
+}
 
+/* ─── RENDER ───────────────────────────────── */
 function render(){
   const f=getFilt();
   document.getElementById('s-tot').textContent=f.length;
@@ -384,7 +473,7 @@ function rList(f){
     const ub=ev.urgencia==='urgente'?'u-urgente':ev.urgencia==='breve'?'u-breve':'u-normal';
     const ul=ev.urgencia==='urgente'?'urgente':ev.urgencia==='breve'?'em breve':'normal';
     const sd=pd(ev.inicio),ed=pd(ev.fim);
-    const dr=sd.getTime()===ed.getTime()?fs(sd):`${fs(sd)} - ${fs(ed)}`;
+    const dr=sd.getTime()===ed.getTime()?fs(sd):`${fs(sd)} – ${fs(ed)}`;
     const extras=[
       ev.publico_estimado?`&#128100; ${ev.publico_estimado}`:'',
       ev.custo_participacao?`Participar: ${ev.custo_participacao}`:'',
